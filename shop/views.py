@@ -14,3 +14,10 @@ def product_category(request, c_slug=None):
     context = {'products': products, 'category': category_page}
     return render(request, "shop/category.html", context)
 
+def product_detail(request, c_slug, product_slug):
+    try:
+        product = Product.objects.get(category__slug=c_slug, slug=product_slug)
+    except Exception as e:
+        raise e
+    context = {'product': product}
+    return render(request, "shop/product_detail.html", context)
