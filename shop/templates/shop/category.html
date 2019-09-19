@@ -1,0 +1,74 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {% if category %}
+        {{ category.description|truncatewords:155 }}
+    {% else %}
+        Welcome to the store where you can buy comfy and awesome cushion.
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+        {{ category.name }} - Pertect Store
+    {% else %}
+        See Our Cushion Collection - Perfect Store
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <!-- breadcrumb navigation -->
+    {% if category %}
+    <section class="py-0">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'shop:all-category' %}">All Category</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+              </ol>
+            </nav>
+        </div>
+    </section>
+    {% endif %}
+    <!-- end breadcrumb navigation -->
+    <!-- category image and text -->
+    <section>
+        <div class="container">
+            {% if category %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                <div class="text-center py-4">
+                    <h1>{{ category.name }}</h1>
+                    <p>{{ category.description }}</p>
+                </div>
+            {% else %}
+                <img src="{% static 'img/banner.jpg' %}" alt="Our Products Collection">
+                <div class="text-center py-4">
+                    <h1>My Products Collection</h1>
+                    <p>My test Product</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- end category image and text -->
+    <!-- product -->
+    <section>
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ product.image_main.url }}" class="img-card-top img-fluid">
+                        <div class="card-body text-center">
+                            <h6>{{ product.name }}</h6>
+                            <p><strong>{{ product.price }} €</strong></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- endproduct -->
+{% endblock content %}
