@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('profil/', user_views.profil, name="profil"),
     path('', include("shop.urls", namespace="shop")),
+    path('cart/', include("cart.urls", namespace="cart")),
 
 ]
 

@@ -21,7 +21,7 @@
                         <p>Rupture de stock</p>
                     {% else %}
                         <div class="py-4">
-                            <a href="" class="btn btn-primary">Ajouter au panier</a>
+                            <a href="{% url 'cart:add-cart' product.id %}" class="btn btn-primary">Ajouter au panier</a>
                         </div>
                     {% endif %}
                 </div>
